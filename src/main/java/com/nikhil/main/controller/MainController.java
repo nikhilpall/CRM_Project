@@ -10,4 +10,21 @@ public class MainController {
 	public String openIndexPage() {
 		return "index";
 	}
+	
+	@GetMapping("/homePage")
+	public String openHomePage() {
+		return "index";
+	}
+	
+	@GetMapping("/loginPage")
+	public String openLoignPage() {
+		return "login";
+	}
+	
+	@GetMapping("/addEmployee")
+	public String openEmpRegisterPage() {
+		return "add-employee";
+	}
+	
+	
 }

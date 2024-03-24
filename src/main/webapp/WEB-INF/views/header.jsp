@@ -10,7 +10,7 @@
         <div class="container">
             <div class="container-fluid p-3">
                 <div class="row">
-                    <div class="col-md-3 fs-4 fw-bold"> <a class="font-style-none text-white" href="index.jsp">CRM Application</a> </div>
+                    <div class="col-md-3 fs-4 fw-bold"> <a class="font-style-none text-white" href="homePage">CRM Application</a> </div>
                     <div class="col-md-6"></div>
                     <div class="col-md-3">
                         <div class="dropdown">
@@ -18,8 +18,8 @@
                                 More
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Home</a></li>
-                                <li><a class="dropdown-item" href="login.jsp">Login</a></li>
+                                <li><a class="dropdown-item" href="homePage">Home</a></li>
+                                <li><a class="dropdown-item" href="loginPage">Login</a></li>
                                 <li><a class="dropdown-item" href="#">Register</a></li>
                             </ul>
                         </div>
