@@ -46,8 +46,8 @@
                                         Courses
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="company-view-courses.jsp">View Courses</a></li>
-                                        <li><a class="dropdown-item" href="add-course.jsp">Add Course</a></li>
+                                        <li><a class="dropdown-item" href="viewCourses">View Courses</a></li>
+                                        <li><a class="dropdown-item" href="addCourses">Add Course</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">

@@ -16,7 +16,7 @@
     <body>
         <jsp:include page="admin-profile-header.jsp"></jsp:include>
 
-        <jsp:include page="add-course-form.jsp"></jsp:include>
+        <jsp:include page="company-edit-course-form.jsp"></jsp:include>
 
         <jsp:include page="footer.jsp"></jsp:include>
 
