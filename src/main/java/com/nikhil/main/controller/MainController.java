@@ -171,6 +171,73 @@ public class MainController {
 	public String openEditCoursePage(@RequestParam("id") int id, Model model) {
 		Course course = courseServices.getCourseDetailsService(id);
 		model.addAttribute("m_course_details", course);
+		model.addAttribute("course", new Course());
 		return "company-edit-course";
+	}
+	
+	@PostMapping("/editCourseForm")
+	public String editCourseForm(@RequestParam("image") MultipartFile file, @RequestParam("imagePath") String imagePath, @RequestParam("id") int id,
+			@Valid @ModelAttribute("course") Course course, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes, Model model) {
+		
+		String imageStoredFolder = "uploads";
+		String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/" + imageStoredFolder;
+		String courseImagePath = "";
+		Course c = courseServices.getCourseDetailsService(id);
+		
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("m_course_details", c);
+			return "company-update-course-failed";
+		}
+		
+		if(!file.isEmpty()) {
+			String extension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")).toLowerCase();
+			if (!extension.equals(".jpg") && !extension.equals(".jpeg") && !extension.equals(".png")) {
+				model.addAttribute("m_course_details", c);
+				return "company-update-course-failed-image";
+			}
+		}
+		else {
+			courseImagePath = imagePath;
+		}
+
+		try {
+			if(!file.isEmpty()) {
+				Path path = Paths.get(uploadDirectory);
+				if (!Files.exists(path)) {
+					Files.createDirectories(path);
+				}
+				String filePath = uploadDirectory + "/" + file.getOriginalFilename();
+				file.transferTo(new File(filePath));
+				
+				courseImagePath = imageStoredFolder + "/" + file.getOriginalFilename();
+			}
+			
+			// set file path
+			course.setCourseImagePath(courseImagePath);
+			
+			// set id 
+			course.setId(id);
+
+			// store file path and other courses details in database
+			boolean status = courseServices.addCoursesServices(course);
+			if (status) {
+				redirectAttributes.addFlashAttribute("successMessage", "Course added successfully!");
+				return "redirect:/viewCoursesSuccess"; // Redirect to success page
+			}
+			model.addAttribute("m_course_details", c);
+			return "company-update-course-failed";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("m_course_details", c);
+			return "company-update-course-failed";
+		}
+	}
+	
+	@GetMapping("/viewCoursesSuccess")
+	public String openViewCoursePageWithUpdateSuccess(Model model) {
+		List<Course> list = courseServices.showAllCoursesService();
+		model.addAttribute("m_course_list", list);
+		return "company-update-course-success";
 	}
 }

@@ -19,12 +19,12 @@
 					<h1 class="text-center pb-5">Update Course</h1>
 					<c:set var="course" value="${m_course_details}"></c:set>
 					
-					<form:form id="addCourseForm" action="addCourseForm" method="post"
+					<form:form id="editCourseForm" action="editCourseForm" method="post"
 						enctype="multipart/form-data" modelAttribute="course">
 						<div class="mb-3">
 							<div class="row align-items-center">
 								<div class="col-md-6">
-									<img alt="course Image" src="${course.getCourseImagePath()}" />
+									<img style="width: 100%;" alt="course Image" src="${course.getCourseImagePath()}" />
 								</div>
 								
 								<div class="col-md-6">
@@ -57,6 +57,12 @@
 								Discount Price</label> <input type="text" class="form-control"
 								name="courseDiscountPrice" id="courseDiscountFee" value="${course.getCourseDiscountPrice()}" />
 							<form:errors path="courseDiscountPrice" cssClass="text-danger" />
+						</div>
+						<div style="display: none;">
+							<input type="hidden" name="imagePath" value="${course.getCourseImagePath()}" />
+						</div>
+						<div style="display: none;">
+							<input type="hidden" name="id" value="${course.getId()}" />
 						</div>
 						<div style="display: flex; justify-content: center;">
 							<input type="submit" class="btn btn-primary" value="Update Course" />

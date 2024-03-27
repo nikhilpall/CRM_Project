@@ -16,6 +16,17 @@
 <body>
 
 	<jsp:include page="admin-profile-header.jsp"></jsp:include>
+	
+	<div class="container-fluid">
+		<div class="container">
+			<div class="row">
+				<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+				  <strong>Success !</strong> Course updated Successfully
+				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<jsp:include page="company-all-course-div.jsp"></jsp:include>
 
