@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -13,8 +16,16 @@
 
     </head>
     <body>
-
-        <jsp:include page="header.jsp"></jsp:include>
+    
+    	<c:set var="admin_obj" value="${s_admin_obj}"></c:set>
+    	
+    	<c:if test="${not empty admin_obj}">
+    		<jsp:include page="admin-profile-header.jsp"></jsp:include>
+    	</c:if>
+    	
+    	<c:if test="${empty admin_obj}">
+    		<jsp:include page="header.jsp"></jsp:include>
+    	</c:if>
 
             <main>
                 <div class="container" style=" height: 350px;">

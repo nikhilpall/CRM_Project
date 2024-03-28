@@ -35,4 +35,16 @@ public class CourseServicesImpl implements CourseServices{
 	public Course getCourseDetailsService(int id) {
 		return courseDao.findById(id).get();
 	}
+	
+	@Override
+	public boolean deleteCourseService(int id) {
+		try {
+			courseDao.deleteById(id);
+			return true;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

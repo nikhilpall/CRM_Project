@@ -17,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.nikhil.main.beans.Admin;
 import com.nikhil.main.beans.Course;
 import com.nikhil.main.beans.Employee;
+import com.nikhil.main.services.AdminServices;
 import com.nikhil.main.services.CourseServices;
 import com.nikhil.main.services.EmployeeService;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -31,6 +34,9 @@ public class MainController {
 
 	@Autowired
 	private CourseServices courseServices;
+	
+	@Autowired
+	private AdminServices adminServices;
 
 	@GetMapping("/")
 	public String openIndexPage() {
@@ -54,10 +60,12 @@ public class MainController {
 
 	@PostMapping("/adminLoginForm")
 	public String adminLoginFrom(@RequestParam("email") String email, @RequestParam("password") String password,
-			Model model) {
-		if (email.equals("admin@gmail.com") && password.equals("Admin@123")) {
+			Model model, HttpSession session) {
+		Admin admin = adminServices.getAdminDetails();
+		if (email.equals(admin.getEmail()) && password.equals(admin.getPassword())) {
 			List<Employee> emp_list = empService.getAllEmployeeService();
 			model.addAttribute("m_emp_list", emp_list);
+			session.setAttribute("s_admin_obj", admin);
 			return "admin-dashboard";
 		} else {
 			return "admin-login-error";
@@ -90,14 +98,11 @@ public class MainController {
 	}
 
 	@GetMapping("/deleteEmployee")
-	public String deleteEmployeeById(@RequestParam("id") int id, Model model) {
+	public String deleteEmployeeById(@RequestParam("id") int id) {
 		String page = "";
 		boolean status = empService.deleteEmployeeService(id);
 		if (status) {
-			page = "admin-emp-delete-success";
-			List<Employee> emp_list = empService.getAllEmployeeService();
-			model.addAttribute("m_emp_list", emp_list);
-			return "admin-dashboard";
+			return "redirect:/adminDashboard";
 		} else {
 			page = "admin-emp-delete-failed";
 		}
@@ -160,7 +165,7 @@ public class MainController {
 	}
 
 
-	@GetMapping("viewCourses")
+	@GetMapping("/viewCourses")
 	public String openViewCoursesPage(Model model) {
 		List<Course> list = courseServices.showAllCoursesService();
 		model.addAttribute("m_course_list", list);
@@ -178,7 +183,7 @@ public class MainController {
 	@PostMapping("/editCourseForm")
 	public String editCourseForm(@RequestParam("image") MultipartFile file, @RequestParam("imagePath") String imagePath, @RequestParam("id") int id,
 			@Valid @ModelAttribute("course") Course course, BindingResult bindingResult,
-			RedirectAttributes redirectAttributes, Model model) {
+			Model model) {
 		
 		String imageStoredFolder = "uploads";
 		String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/" + imageStoredFolder;
@@ -222,22 +227,37 @@ public class MainController {
 			// store file path and other courses details in database
 			boolean status = courseServices.addCoursesServices(course);
 			if (status) {
-				redirectAttributes.addFlashAttribute("successMessage", "Course added successfully!");
-				return "redirect:/viewCoursesSuccess"; // Redirect to success page
+				return "redirect:/courseUpdateSuccess";
 			}
-			model.addAttribute("m_course_details", c);
-			return "company-update-course-failed";
+			return "redirect:/courseUpdateFailed";
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("m_course_details", c);
-			return "company-update-course-failed";
+			return "redirect:/courseUpdateFailed";
 		}
 	}
 	
-	@GetMapping("/viewCoursesSuccess")
-	public String openViewCoursePageWithUpdateSuccess(Model model) {
-		List<Course> list = courseServices.showAllCoursesService();
-		model.addAttribute("m_course_list", list);
-		return "company-update-course-success";
+	@GetMapping("/courseUpdateSuccess")
+	public String courseUpdaeSuccessPopUp() {
+		return "company-course-updated-success";
 	}
+	
+	@GetMapping("/courseUpdateFailed")
+	public String courseUpdaeFailedPopUp() {
+		return "company-course-updated-failed";
+	}
+	
+	@GetMapping("/deleteCourse")
+	public String deleteCourseBtn(@RequestParam("id") int id) {
+		courseServices.deleteCourseService(id);
+		return "redirect:/viewCourses";
+	}
+	
+	@GetMapping("/adminProfile")
+	public String openAdminProfilePage(Model model, HttpSession session) {
+		Admin admin = adminServices.getAdminDetails();
+		model.addAttribute("m_profile_url", admin.getImagePath());
+		session.setAttribute("s_admin_obj", admin);
+		return "admin-profile";
+	}
+	
 }

@@ -34,14 +34,14 @@
 						<td>${emp.getEmpEmail()}</td>
 						<td>${emp.getEmpJobTitle()}</td>
 						<td>${emp.getEmpSalary()}</td>
-						<td><a href="deleteEmployee?id=${emp.getEmpId()}"
+						<td><button onclick="employeeDeleteAlert(${emp.getEmpId()})"
 							class="btn btn-danger btn-delete"> <svg
 									xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 									fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                     <path
 										d="M0 1.5A.5.5 0 0 1 .5 1h15a.5.5 0 0 1 .5.5V3h-16V2h15a.5.5 0 0 1 .5.5v11.793a1 1 0 0 1-.293.707l-7 7a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 .293 15.5L0 15.207V1.5z" />
                                     </svg>
-						</a></td>
+						</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

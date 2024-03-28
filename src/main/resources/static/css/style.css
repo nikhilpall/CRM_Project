@@ -190,13 +190,20 @@ form .text h3 a:hover{
     color : white;
 }
 
-.header-profile-img-div a{
+.header-profile-img-div button{
     text-decoration: none;
     color : gray;
     margin : 0px 5px;
     border-radius: 8px;
     font-weight: bold;
+    border : none !important;
 }
+
+.header-profile-img-div .dropdown-menu li a:hover {
+    font-weight: bold;
+    background-color: #edebeb;
+}
+
 
 .questions-div{
     background-color: white;
@@ -423,3 +430,56 @@ form .text h3 a:hover{
 .add-course-form-div form input, .add-emp-div form input{
     border : 1px solid black;
 }
+
+.admin-profile-div{
+    border: 1px solid rgb(221, 214, 214);
+}
+
+.admin-profile-div img{
+    width: 100%;
+}
+
+.admin-profile-div .admin-details-div table tr td{
+    padding: 10px;
+    font-size: 1.3rem;
+}
+
+.admin-profile-div button{
+    border: none;
+}
+
+.admin-profile-div .admin-details-div table tr td:nth-child(1){
+    font-weight: 500;
+}
+
+.admin-profile-div .admin-image-div{
+    position: relative;
+    border-right: 1px solid rgb(221, 214, 214);
+}
+
+.admin-profile-div .admin-image-div .admin-edit-profile-div{
+    position: absolute;
+    top : 0;
+    right: 0;
+}
+
+.admin-profile-div .admin-details-div{
+    position: relative;
+}
+
+.admin-profile-div .admin-details-div .admin-edit-details-div{
+    position: absolute;
+    top : 0;
+    right: 0;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-grow {
+    margin: 0 5px; /* Adjust the spacing between spinners */
+}
+

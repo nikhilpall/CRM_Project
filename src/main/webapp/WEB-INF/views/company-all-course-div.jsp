@@ -31,8 +31,13 @@
 								</div>
 							</div>
 						</a>
-						<div class="text-center d-grid gap-2 my-3">
-							<a href="editCourse?id=${course.getId()}&imagePath=${course.getCourseImagePath()}" type="button" class="btn btn-danger fw-bold">Edit</a>
+						<div class="row" style="border-top : 1px solid #b0acac;">
+							<div class="text-center my-3 col-md-6">
+								<a href="editCourse?id=${course.getId()}&imagePath=${course.getCourseImagePath()}" type="button" class="btn btn-info fw-bold">Edit</a>
+							</div>
+							<div class="text-center my-3 col-md-6">
+								<button onclick="courseDeleteAlert(${course.getId()})" type="button" class="btn btn-danger fw-bold">Delete</button>
+							</div>
 						</div>
 					</div>
 
@@ -40,5 +45,7 @@
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript" src="js/custom.js"></script>
 </body>
 </html>
