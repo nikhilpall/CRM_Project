@@ -33,7 +33,7 @@
                         </div>
                         <div class="card-body m-auto">
                             <h5 class="card-title fw-bold">I am a</h5>
-                            <a href="customer-login.jsp" class="btn btn-primary">Customer</a>
+                            <a href="customerLogin" class="btn btn-primary">Customer</a>
                         </div>
                     </div>
                     <div class="card text-center who-you-are-card">

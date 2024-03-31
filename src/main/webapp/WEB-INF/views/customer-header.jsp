@@ -10,10 +10,13 @@
 <title>JSP Page</title>
 </head>
 <body>
-	<c:set var="adminObj" value="${s_admin_obj}" ></c:set>
+	<c:set var="customerObj" value="${s_customer_obj}"></c:set>
 	<c:set var="profileUrl" value="images/default-profile-pic.png"></c:set>
-	<c:if test="${not empty adminObj}">
-		<c:set var="profileUrl" value="${adminObj.getImagePath()}"></c:set>
+	<c:if test="${not empty customerObj}">
+		<c:set var="profileUrl" value="${customerObj.getImagePath()}"></c:set>
+		<c:if test="${empty profileUrl}">
+			<c:set var="profileUrl" value="images/default-profile-pic.png"></c:set>
+		</c:if>
 	</c:if>
 	<header class="header">
 		<div class="container">
@@ -36,10 +39,10 @@
 								id="dropdownMenuButton" data-bs-toggle="dropdown"
 								aria-expanded="false">
 								<img class="rounded-circle" src="${profileUrl}"
-									alt="Profile Picture" width="40" /> ${adminObj.getName()}
+									alt="Profile Picture" width="40" /> ${customerObj.getName()}
 							</button>
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<li><a class="dropdown-item" href="adminProfile">Profile</a></li>
+								<li><a class="dropdown-item" href="customerProfile">Profile</a></li>
 								<li><a class="dropdown-item" href="logout">Logout</a></li>
 							</ul>
 						</div>
@@ -54,29 +57,8 @@
 					<div class="row">
 						<nav>
 							<ul class="nav justify-content-center">
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle text-danger fw-bold" href="#"
-									id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-									aria-expanded="false"> Employees </a>
-									<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="adminDashboard">View
-												Employees</a></li>
-										<li><a class="dropdown-item" href="addEmployee">Add
-												Employee</a></li>
-									</ul></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle text-danger fw-bold" href="#"
-									id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-									aria-expanded="false"> Courses </a>
-									<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="viewCourses">View
-												Courses</a></li>
-										<li><a class="dropdown-item" href="addCourses">Add
-												Course</a></li>
-									</ul></li>
-								<li class="nav-item"><a
-									class="nav-link text-danger fw-bold"
-									href="admin-complaints.jsp">Complaints</a></li>
+								<li class="nav-item"> <a class="nav-link text-danger fw-bold" href="viewCourses">Courses</a> </li>
+								<li class="nav-item"><a class="nav-link text-danger fw-bold" href="#">Complaints</a></li>
 							</ul>
 						</nav>
 					</div>

@@ -13,7 +13,7 @@ public class AdminServiceImpl implements AdminServices {
 	private AdminDao adminDao;
 	
 	@Override
-	public void updateAdminProfileUrl(Admin admin) {
+	public void updateAdmin(Admin admin) {
 		adminDao.save(admin);
 	}
 	

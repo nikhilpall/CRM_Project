@@ -19,11 +19,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nikhil.main.beans.Admin;
 import com.nikhil.main.beans.Course;
+import com.nikhil.main.beans.CustomerRegister;
 import com.nikhil.main.beans.Employee;
 import com.nikhil.main.services.AdminServices;
 import com.nikhil.main.services.CourseServices;
+import com.nikhil.main.services.CustomerRegisterService;
 import com.nikhil.main.services.EmployeeService;
-
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -37,6 +39,9 @@ public class MainController {
 	
 	@Autowired
 	private AdminServices adminServices;
+	
+	@Autowired
+	private CustomerRegisterService customerRegisterService;
 
 	@GetMapping("/")
 	public String openIndexPage() {
@@ -63,10 +68,8 @@ public class MainController {
 			Model model, HttpSession session) {
 		Admin admin = adminServices.getAdminDetails();
 		if (email.equals(admin.getEmail()) && password.equals(admin.getPassword())) {
-			List<Employee> emp_list = empService.getAllEmployeeService();
-			model.addAttribute("m_emp_list", emp_list);
 			session.setAttribute("s_admin_obj", admin);
-			return "admin-dashboard";
+			return "redirect:/adminDashboard";
 		} else {
 			return "admin-login-error";
 		}
@@ -86,15 +89,18 @@ public class MainController {
 	}
 
 	@PostMapping("/addEmployeeForm")
-	public String addEmpForm(@Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult) {
+	public String addEmpForm(@Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
-			return "admin-emp-added-falied";
+			model.addAttribute("m_add_emp_status_failed", "failed");
+			return "admin-add-employee";
 		}
 		boolean status = empService.addEmployoeeService(employee);
 		if (status) {
-			return "admin-emp-added-success";
+			model.addAttribute("m_add_emp_status", "success");
+			return "redirect:/addEmployee?m_add_emp_status=success";
 		}
-		return "admin-emp-added-falied";
+		model.addAttribute("m_add_emp_status_failed", "failed");
+		return "admin-add-employee";
 	}
 
 	@GetMapping("/deleteEmployee")
@@ -169,7 +175,7 @@ public class MainController {
 	public String openViewCoursesPage(Model model) {
 		List<Course> list = courseServices.showAllCoursesService();
 		model.addAttribute("m_course_list", list);
-		return "company-view-courses";
+		return "view-courses";
 	}
 	
 	@GetMapping("/editCourse")
@@ -254,10 +260,117 @@ public class MainController {
 	
 	@GetMapping("/adminProfile")
 	public String openAdminProfilePage(Model model, HttpSession session) {
-		Admin admin = adminServices.getAdminDetails();
-		model.addAttribute("m_profile_url", admin.getImagePath());
-		session.setAttribute("s_admin_obj", admin);
+		Object adminObj = session.getAttribute("s_admin_obj");
+		if(adminObj != null && adminObj instanceof Admin) {
+			Admin admin = adminServices.getAdminDetails();
+			session.setAttribute("s_admin_obj", admin);
+		}
 		return "admin-profile";
 	}
 	
+	@GetMapping("/editAdminPage")
+	public String openEditAdminPage(Model model) {
+		model.addAttribute("admin", new Admin());
+		return "admin-edit-profile";
+	}
+	
+	@PostMapping("/editAdminProfileForm")
+	public String editAdminProfileForm(@Valid @ModelAttribute("admin") Admin admin, BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			return "admin-edit-profil-failed";
+		}
+		
+		Admin adminObjFromDatabase = adminServices.getAdminDetails();
+		
+		admin.setId(adminObjFromDatabase.getId());
+		admin.setImagePath(adminObjFromDatabase.getImagePath());
+		
+		adminServices.updateAdmin(admin);
+		
+		return "redirect:/adminProfile";
+	}
+	
+	@GetMapping("/logout")
+	public void logoutButton(HttpSession session, HttpServletResponse res) throws Exception {
+		session.invalidate();
+		res.sendRedirect("/");
+	}
+	
+	@GetMapping("/aboutUs")
+	public String openAboutUsPage() {
+		return "about-us";
+	}
+	
+	@GetMapping("/contactUs")
+	public String openContactUsPage() {
+		return "contact-us";
+	}
+	
+	@GetMapping("/customerLogin")
+	public String openCustomerLoginPage() {
+		return "customer-login";
+	}
+	
+	@GetMapping("/customerRegister")
+	public String openCustomerRegisterPage(Model model) {
+		model.addAttribute("customerRegister", new CustomerRegister());
+		return "customer-register";
+	}
+	
+	@PostMapping("/customerRegisterForm")
+	public String customerRegisterForm(@Valid @ModelAttribute("customerRegister") CustomerRegister customerRegister, BindingResult bindingResult, HttpSession session) {
+		if(bindingResult.hasErrors()) {
+			return "customer-register";
+		}
+		
+		boolean status = customerRegisterService.saveCustomerDetailsService(customerRegister);
+		
+		if(status) {
+			session.setAttribute("s_customer_obj", customerRegister);
+			return "redirect:/viewCourses";
+		}
+		
+		return "customer-register";
+	}
+	
+	@GetMapping("/customerProfile")
+	public String openCustomerProfilePage() {
+		return "customer-profile";
+	}
+	
+	@GetMapping("/editCustomerProfile")
+	public String editCustomerProfilePage() {
+		return "customer-edit-profile";
+	}
+	
+	@PostMapping("/customerEditProfileForm")
+	public String customerEditProfileForm(@ModelAttribute CustomerRegister customerRegister, HttpSession session) {
+		CustomerRegister obj = (CustomerRegister) session.getAttribute("s_customer_obj");
+		customerRegister.setId(obj.getId());
+		customerRegister.setImagePath(obj.getImagePath());
+		boolean status = customerRegisterService.saveCustomerDetailsService(customerRegister);
+		if(status) {
+			session.setAttribute("s_customer_obj", customerRegister);
+			return "update-customer-success";
+		}
+		return "update-customer-failed";
+	}
+	
+	
+	@PostMapping("/customerLoginForm")
+	public String customerLoginForm(@RequestParam("email") String email, @RequestParam("password") String pssword, HttpSession session) {
+		CustomerRegister customerObj = customerRegisterService.getCustomerDetailsService(email, pssword);
+		
+		if(customerObj != null) {
+			session.setAttribute("s_customer_obj", customerObj);
+			return "redirect:/viewCourses";
+		}
+		
+		return "redirect:/customerLogin?login=fail";
+	}
+
 }
+
+
+

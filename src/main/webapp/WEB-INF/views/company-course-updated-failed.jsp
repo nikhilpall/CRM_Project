@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +18,12 @@
 <%-- sweet alert css cdn end --%>
 </head>
 <body>
+
+	<c:set var="adminObj" value="${s_admin_obj}"></c:set>
+
+	<c:if test="${empty adminObj}">
+		<% response.sendRedirect("/selectLogin"); %>
+	</c:if>
 
 
 	<%-- custom js start --%>

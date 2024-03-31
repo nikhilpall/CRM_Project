@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!doctype html>
 <html lang="en">
 
@@ -25,12 +28,19 @@
 
 <body>
 
-	<jsp:include page="admin-profile-header.jsp"></jsp:include>
+	<c:set var="adminObj" value="${s_admin_obj}"></c:set>
+	<c:set var="customerObj" value="${s_customer_obj}"></c:set>
+	<c:set var="employeeObj" value="${s_employee_obj}"></c:set>
+	
+	<c:if test="${empty adminObj and empty customerObj and empty employeeObj}">
+		<% response.sendRedirect("/selectLogin"); %>
+	</c:if>
+	
+		<jsp:include page="header.jsp"></jsp:include>
 
-	<jsp:include page="admin-profile-div.jsp"></jsp:include>
+		<jsp:include page="admin-profile-div.jsp"></jsp:include>
 
-	<jsp:include page="footer.jsp"></jsp:include>
-
+		<jsp:include page="footer.jsp"></jsp:include>
 
 
 	<script

@@ -39,9 +39,10 @@
 	
 	<jsp:include page="header.jsp"></jsp:include>
 
-	<jsp:include page="customer-profile-div.jsp"></jsp:include>
+	<jsp:include page="customer-edit-profile-form.jsp"></jsp:include>
 
 	<jsp:include page="footer.jsp"></jsp:include>
+
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.min.js"></script>

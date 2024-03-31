@@ -4,7 +4,7 @@ import com.nikhil.main.beans.Admin;
 
 public interface AdminServices {
 	
-	public void updateAdminProfileUrl(Admin admin); 
+	public void updateAdmin(Admin admin); 
 	
 	public Admin getAdminDetails();
 }

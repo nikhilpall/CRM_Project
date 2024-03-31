@@ -1,6 +1,5 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,11 +13,18 @@
         <%-- Bootstrap css end --%>
     </head>
     <body>
-        <jsp:include page="admin-profile-header.jsp"></jsp:include>
+    	<c:set var="adminObj" value="${s_admin_obj}"></c:set>
 
-        <jsp:include page="add-course-form.jsp"></jsp:include>
-
-        <jsp:include page="footer.jsp"></jsp:include>
+		<c:if test="${empty adminObj}">
+			<% response.sendRedirect("/selectLogin"); %>
+		</c:if>
+		
+		<jsp:include page="admin-profile-header.jsp"></jsp:include>
+	
+		<jsp:include page="add-course-form.jsp"></jsp:include>
+	
+		<jsp:include page="footer.jsp"></jsp:include>
+		
 
         <%-- Bootstrap js start --%>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

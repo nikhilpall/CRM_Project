@@ -28,7 +28,7 @@
     	</c:if>
 
             <main>
-                <div class="container" style=" height: 350px;">
+                <div class="container" style=" height: 350px; position: relative;">
                     <div class="col-md-6 display-text-align">
                         <h2 class="fw-bold text-white">Enhance customer relationships and streamline interactions with our CRM solutions.</h2>
                     </div>

@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Admin {
@@ -12,16 +15,21 @@ public class Admin {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Size(min = 3, max = 100, message = "enter valid name")
 	private String name;
 	
+	@Email
 	private String email;
 	
+	@Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9])(?=.*[0-9]).{8,}$", message = "enter strong password")
 	private String password;
 	
 	private String imagePath;
 	
+	@Size(min = 10, max = 10, message = "enter valid phone number")
 	private String phoneNo;
 	
+	@Size(min = 2, max = 100, message = "enter valid role")
 	private String role;
 	
 	private String address;

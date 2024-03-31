@@ -39,18 +39,6 @@
 								</div>
 							</a>
 						</div>
-						<div class="d-flex justify-content-between px-5"
-							style="background-color: rgb(210, 210, 210);">
-							<div class="text-center my-3">
-								<a
-									href="editCourse?id=${course.getId()}&imagePath=${course.getCourseImagePath()}"
-									type="button" class="btn btn-info fw-bold">Edit</a>
-							</div>
-							<div class="text-center my-3">
-								<button onclick="courseDeleteAlert(${course.getId()})"
-									type="button" class="btn btn-danger fw-bold">Delete</button>
-							</div>
-						</div>
 					</div>
 				</c:forEach>
 			</div>

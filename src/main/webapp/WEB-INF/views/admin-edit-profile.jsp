@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,23 +13,16 @@
 <%-- Bootstrap css end --%>
 </head>
 <body>
+
+	<c:set var="adminObj" value="${s_admin_obj}"></c:set>
+
+	<c:if test="${empty adminObj}">
+		<% response.sendRedirect("/selectLogin"); %>
+	</c:if>
+
 	<jsp:include page="admin-profile-header.jsp"></jsp:include>
 
-	<div class="container">
-		<div class="container-fluid">
-			<div class="row">
-				<div
-					class="alert alert-danger alert-dismissible fade show text-center"
-					role="alert">
-					<strong>Failed !</strong> Employee not added due to some error
-					<button type="button" class="btn-close" data-bs-dismiss="alert"
-						aria-label="Close"></button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<jsp:include page="add-emp-form.jsp"></jsp:include>
+	<jsp:include page="admin-profile-edit-form.jsp"></jsp:include>
 
 	<jsp:include page="footer.jsp"></jsp:include>
 
@@ -36,6 +30,5 @@
 	<%-- Bootstrap js start --%>
 	<script src="js/bootstrap.bundle.min.js"></script>
 	<%-- Bootstrap js end --%>
-
 </body>
 </html>
