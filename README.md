@@ -62,8 +62,3 @@
      - Feedback Submission: Provide feedback on courses or services.
      - Complaints Management: Submit and track complaints.
      - Profile Update: Allow customers to update their profile details.
-
-5. **Total Number of Pages:**
-   - Admin Module: Approximately 7 pages
-   - Employee Module: Approximately 7 pages
-   - Customer Module: Approximately 7 pages
