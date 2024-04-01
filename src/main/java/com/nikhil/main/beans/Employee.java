@@ -29,6 +29,62 @@ public class Employee {
 	@Size(min = 3, max = 50, message = "salary not valid")
 	private String empSalary;
 	
+	private String empProfileImagePath;
+	
+	private String empCountry;
+	
+	private String empAddress;
+	
+	private String empLinkedIn;
+	
+	private String empFacebook;
+	
+	private String empInstagram;
+	
+	private String empTwitter;
+
+	public String getEmpProfileImagePath() {
+		return empProfileImagePath;
+	}
+	public void setEmpProfileImagePath(String empProfileImagePath) {
+		this.empProfileImagePath = empProfileImagePath;
+	}
+	public String getEmpCountry() {
+		return empCountry;
+	}
+	public void setEmpCountry(String empCountry) {
+		this.empCountry = empCountry;
+	}
+	public String getEmpAddress() {
+		return empAddress;
+	}
+	public void setEmpAddress(String empAddress) {
+		this.empAddress = empAddress;
+	}
+	public String getEmpLinkedIn() {
+		return empLinkedIn;
+	}
+	public void setEmpLinkedIn(String empLinkedIn) {
+		this.empLinkedIn = empLinkedIn;
+	}
+	public String getEmpFacebook() {
+		return empFacebook;
+	}
+	public void setEmpFacebook(String empFacebook) {
+		this.empFacebook = empFacebook;
+	}
+	public String getEmpInstagram() {
+		return empInstagram;
+	}
+	public void setEmpInstagram(String empInstagram) {
+		this.empInstagram = empInstagram;
+	}
+	public String getEmpTwitter() {
+		return empTwitter;
+	}
+	public void setEmpTwitter(String empTwitter) {
+		this.empTwitter = empTwitter;
+	}
 	public int getEmpId() {
 		return empId;
 	}

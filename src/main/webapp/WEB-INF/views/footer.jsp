@@ -30,8 +30,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="row footer-copyright-div">
-                    <p class="pt-3 text-black">© 2024 <a href="#">Nikhil Pall</a>. All rights reserved.</p>
+                <div class="container">
+                	<hr class="m-0 text-white">
+                	<div class="row footer-copyright-div">
+	                    <p class="py-4 text-white m-0">© 2024 <a href="#">Nikhil Pall</a>. All rights reserved.</p>
+	                </div>
                 </div>
             </div>
         </footer>

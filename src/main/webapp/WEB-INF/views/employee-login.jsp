@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -138,16 +139,20 @@
             <div class="shape"></div>
             <div class="shape"></div>
         </div>
-        <form>
-            <h3>Login</h3>
-
-            <label for="username">Email</label>
-            <input type="text" placeholder="Enter email" name="email" id="username">
-
-            <label for="password">Password</label>
-            <input type="password" placeholder="Enter password" name="password" id="password">
-
-            <input type="submit" class="button" value="Log In" />
-        </form>
+        <form action="employeeLoginForm" method="post">
+			<h3>Login</h3>
+	
+			<label for="email">Email</label> <input type="text"
+				placeholder="Enter email" name="email" id="email"> <label
+				for="password">Password</label> <input type="password"
+				placeholder="Enter password" name="password" id="password"> 
+				<c:if test="${param.login eq 'fail'}"><div style="text-align: center; color: red; font-size: 15px; margin-top: 10px;">Email Id and password didn't matched</div></c:if>
+				<input type="submit" class="button" value="Log In" />
+	
+			<div style="text-align: center;">
+				<p>Don't have an account ?</p>
+				<a href="customerRegister">Register</a> here
+			</div>
+		</form>
     </body>
 </html>

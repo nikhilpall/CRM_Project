@@ -11,4 +11,6 @@ public interface EmployeeService {
 	public List<Employee> getAllEmployeeService();
 	
 	public boolean deleteEmployeeService(int id);
+	
+	public Employee getEmployeeByEmailAndPassword(String email, String password);
 }

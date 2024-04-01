@@ -44,4 +44,9 @@ public class EmployeeServicesImpl implements EmployeeService {
 		}
 	}
 	
+	
+	@Override
+	public Employee getEmployeeByEmailAndPassword(String email, String password) {
+		return employeeDao.findEmployeeByEmpEmailAndEmpPassword(email, password);
+	}
 }

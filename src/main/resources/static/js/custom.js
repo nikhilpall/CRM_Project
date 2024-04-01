@@ -323,6 +323,3 @@ function customerEditProfile() {
 		}
 	})();
 }
-
-
-

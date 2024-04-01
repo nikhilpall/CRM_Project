@@ -275,12 +275,11 @@ form .text h3 a:hover {
 
 .footer-copyright-div {
 	text-align: center;
-	background-color: #9bacda;
 }
 
 .footer-copyright-div p a {
 	text-decoration: none;
-	color: black;
+	color: white;
 }
 
 .custom-body {
@@ -546,39 +545,91 @@ form .text h3 a:hover {
 	color: rgb(44, 179, 75) !important;
 }
 
-.edit-customer-form-div form input{
-	border : 1px solid black !important;
+.edit-customer-form-div form input {
+	border: 1px solid black !important;
 }
 
 /* customer edit profile */
 .customer-profile-image-div {
-    position: relative;
-    overflow: hidden; /* Ensure the camera image stays within the container */
+	position: relative;
+	overflow: hidden;
+	/* Ensure the camera image stays within the container */
 }
 
 .customer-profile-image-div img {
-    transition: filter 0.5s ease; /* Smooth transition for the blur effect */
-    width: 100px; /* Ensure the image takes the full width of its container */
-    cursor: pointer;
+	transition: filter 0.5s ease;
+	/* Smooth transition for the blur effect */
+	width: 100px;
+	/* Ensure the image takes the full width of its container */
+	cursor: pointer;
 }
 
 .customer-profile-image-div:hover img {
-    filter: blur(2px); /* Blur the original image on hover */
+	filter: blur(2px); /* Blur the original image on hover */
 }
 
 .customer-profile-image-div:hover::after {
-    content: "";
-    position: absolute;
-    top: 30%;
-    left: 30%;
-    width: 40%;
-    height: 40%;
-    background-image: url("../images/camera-image.png");
-    background-size: contain; /* Ensure camera image fits within the dimensions of the original image */
-    background-repeat: no-repeat; /* Prevent repeating the background image */
-    background-position: center; /* Center the background image */
-    cursor: pointer;
-    z-index: 1;
+	content: "";
+	position: absolute;
+	top: 30%;
+	left: 30%;
+	width: 40%;
+	height: 40%;
+	background-image: url("../images/camera-image.png");
+	background-size: contain;
+	/* Ensure camera image fits within the dimensions of the original image */
+	background-repeat: no-repeat;
+	/* Prevent repeating the background image */
+	background-position: center; /* Center the background image */
+	cursor: pointer;
+	z-index: 1;
 }
+
+/* All complaints css */
+.all-complaints-btn div {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100%;
+}
+
+.issueOpen {
+	border: 1px solid gray;
+	color: gray;
+}
+
+.issueInProgress {
+	border: 1px solid green;
+	color: green;
+}
+
+.issueClosed {
+	border: 1px solid red;
+	color: red;
+}
+
+.all-complaints-btn div:nth-child(1) {
+	width: 15%;
+	font-size: 0.8rem;
+}
+
+.all-complaints-btn div:nth-child(2) {
+	width: 70%;
+}
+
+.all-complaints-btn div:nth-child(3) {
+	width: 15%;
+	text-align: end;
+}
+
+.accordion-button{
+    background-color: white !important;
+}
+
+.accordion-button:focus{
+    box-shadow: none !important;
+}
+
+
 
 

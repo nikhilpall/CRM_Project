@@ -10,14 +10,22 @@
 <title>JSP Page</title>
 </head>
 <body>
+
+	<c:set var="adminObj" value="${s_admin_obj}"></c:set>
 	<c:set var="customerObj" value="${s_customer_obj}"></c:set>
-	<c:set var="profileUrl" value="images/default-profile-pic.png"></c:set>
-	<c:if test="${not empty customerObj}">
-		<c:set var="profileUrl" value="${customerObj.getImagePath()}"></c:set>
-		<c:if test="${empty profileUrl}">
-			<c:set var="profileUrl" value="images/default-profile-pic.png"></c:set>
-		</c:if>
+	<c:set var="employeeObj" value="${s_employee_obj}"></c:set>
+	
+	<c:if test="${empty adminObj and empty customerObj and empty employeeObj}">
+		<% response.sendRedirect("/selectLogin"); %>
 	</c:if>
+	
+	<c:set var="profileUrl" value="images/default-profile-pic.png"></c:set>
+	
+	<c:if test="${not empty employeeObj}">
+		<c:set var="profileUrl" value="${employeeObj.getEmpProfileImagePath()}"></c:set>
+	</c:if>
+	
+	
 	<header class="header">
 		<div class="container">
 			<div class="container-fluid p-4">
@@ -57,9 +65,10 @@
 					<div class="row">
 						<nav>
 							<ul class="nav justify-content-center">
+								<li class="nav-item"> <a class="nav-link text-danger fw-bold" href="empDashboard">Dashboard</a> </li>
 								<li class="nav-item"> <a class="nav-link text-danger fw-bold" href="viewCourses">Courses</a> </li>
 								<li class="nav-item"><a class="nav-link text-danger fw-bold" href="customerComplaint">Complaints</a></li>
-								<li class="nav-item"><a class="nav-link text-danger fw-bold" href="customerAllComplaint">My Complaints</a></li>
+								<li class="nav-item"><a class="nav-link text-danger fw-bold" href="customerAllComplaint">Follow up</a></li>
 							</ul>
 						</nav>
 					</div>

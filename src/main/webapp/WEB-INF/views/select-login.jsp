@@ -42,7 +42,7 @@
                         </div>
                         <div class="card-body m-auto">
                             <h5 class="card-title fw-bold">I am</h5>
-                            <a href="employee-login.jsp" class="btn btn-primary">Employee</a>
+                            <a href="employeeLogin" class="btn btn-primary">Employee</a>
                         </div>
                     </div>
                 </div>

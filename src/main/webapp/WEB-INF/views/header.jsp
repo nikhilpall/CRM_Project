@@ -19,7 +19,9 @@
 		<c:when test="${not empty customerObj}">
 			<jsp:include page="customer-header.jsp"></jsp:include>
 		</c:when>
-		<c:when test="${not empty employeeObj}"></c:when>
+		<c:when test="${not empty employeeObj}">
+			<jsp:include page="employee-header.jsp"></jsp:include>
+		</c:when>
 		<c:otherwise>
 			<header class="header">
 				<div class="container">
