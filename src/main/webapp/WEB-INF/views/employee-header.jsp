@@ -67,8 +67,8 @@
 							<ul class="nav justify-content-center">
 								<li class="nav-item"> <a class="nav-link text-danger fw-bold" href="empDashboard">Dashboard</a> </li>
 								<li class="nav-item"> <a class="nav-link text-danger fw-bold" href="viewCourses">Courses</a> </li>
-								<li class="nav-item"><a class="nav-link text-danger fw-bold" href="customerComplaint">Complaints</a></li>
-								<li class="nav-item"><a class="nav-link text-danger fw-bold" href="customerAllComplaint">Follow up</a></li>
+								<li class="nav-item"><a class="nav-link text-danger fw-bold" href="employeeComplaint">Register Complaint</a></li>
+								<li class="nav-item"><a class="nav-link text-danger fw-bold" href="followUps">Follow up</a></li>
 							</ul>
 						</nav>
 					</div>

@@ -31,4 +31,9 @@ public class ComplaintServicesImpl implements ComplaintServices {
 	public List<Complaint> getAllComplaintsByCustomerId(int customerId) {
 		return complaintDao.findByCustomerId(customerId);
 	}
+	
+	@Override
+	public List<Complaint> getAllComplaints() {
+		return complaintDao.findAll();
+	}
 }

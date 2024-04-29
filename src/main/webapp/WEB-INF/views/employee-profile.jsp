@@ -1,8 +1,3 @@
-<%-- 
-    Document   : employee-profile
-    Created on : 24-Mar-2024, 1:13:53 am
-    Author     : nikhil
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

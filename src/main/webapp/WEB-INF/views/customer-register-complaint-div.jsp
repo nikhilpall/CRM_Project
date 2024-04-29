@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:set var="courseList" value="${m_course_details}"></c:set>
     <div class="container-fluid my-5">
         <div class="container">
             <div class="row">
@@ -28,10 +29,10 @@
                         </div>
                         <div class="form-floating mb-3">
                             <form:select path="courseComplaintId" class="form-select border border-secondary" aria-label="Floating label select example">
-						        <form:option value="" label="Select course in which you are facing issue" />
-						        <form:option value="1">One</form:option>
-						        <form:option value="2">Two</form:option>
-						        <form:option value="3">Three</form:option>
+                            	<form:option value="" label="Select course in which you are facing issue" />
+                            	<c:forEach var="course" items="${courseList}">
+                            		<form:option value="${course.getId()}">${course.getCourseTitle()}</form:option>
+                            	</c:forEach>
                             </form:select>
                             <form:errors path="courseComplaintId" cssClass="text-danger" />
                             <label for="courseComplaintId">Select course</label>

@@ -9,4 +9,6 @@ public interface ComplaintServices {
 	public boolean saveComplaintService(Complaint complaint);
 	
 	public List<Complaint> getAllComplaintsByCustomerId(int customerId);
+	
+	public List<Complaint> getAllComplaints();
 }

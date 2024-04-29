@@ -148,11 +148,6 @@
 				placeholder="Enter password" name="password" id="password"> 
 				<c:if test="${param.login eq 'fail'}"><div style="text-align: center; color: red; font-size: 15px; margin-top: 10px;">Email Id and password didn't matched</div></c:if>
 				<input type="submit" class="button" value="Log In" />
-	
-			<div style="text-align: center;">
-				<p>Don't have an account ?</p>
-				<a href="customerRegister">Register</a> here
-			</div>
 		</form>
     </body>
 </html>

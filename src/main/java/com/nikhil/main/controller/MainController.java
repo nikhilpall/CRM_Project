@@ -141,7 +141,7 @@ public class MainController {
 
 		String extension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."))
 				.toLowerCase();
-		if (!extension.equals(".jpg") && !extension.equals(".jpeg") && !extension.equals(".png")) {
+		if (!extension.equals(".jpg") && !extension.equals(".jpeg") && !extension.equals(".png") && !extension.equals(".jfif")) {
 			return "add-course-failed-image";
 		}
 
@@ -379,13 +379,17 @@ public class MainController {
 	@GetMapping("/customerComplaint")
 	public String openCustomerComplaintPage(Model model) {
 		model.addAttribute("complaint", new Complaint());
+		List<Course> course_list = courseServices.showAllCoursesService();
+		model.addAttribute("m_course_details", course_list);
 		return "customer-register-complaint-page";
 	}
 
 	@PostMapping("/customerComplaintRegisterForm")
 	public String customerComplaintRegisterForm(@Valid @ModelAttribute("complaint") Complaint complaint,
-			BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
+			BindingResult bindingResult, @RequestParam("file") MultipartFile file, Model model) {
 		if (bindingResult.hasErrors()) {
+			List<Course> course_list = courseServices.showAllCoursesService();
+			model.addAttribute("m_course_details", course_list);
 			return "customer-register-complaint-page";
 		}
 
@@ -417,9 +421,13 @@ public class MainController {
 			if (status) {
 				return "redirect:/customerAllComplaint";
 			}
+			List<Course> course_list = courseServices.showAllCoursesService();
+			model.addAttribute("m_course_details", course_list);
 			return "customer-register-complaint-page";
 		} catch (Exception e) {
 			e.printStackTrace();
+			List<Course> course_list = courseServices.showAllCoursesService();
+			model.addAttribute("m_course_details", course_list);
 			return "customer-register-complaint-page";
 		}
 	}
@@ -449,14 +457,23 @@ public class MainController {
 		Employee emp = empService.getEmployeeByEmailAndPassword(email, password);
 		if(emp != null) {
 			session.setAttribute("s_employee_obj", emp);
-			return "";
+			return "redirect:/empDashboard";
 		}
 		return "redirect:/employeeLogin?login=fail";
 	}
 	
 	@GetMapping("/empDashboard")
-	public String empDashboardPage() {
+	public String empDashboardPage(Model model) {
+		List<Complaint> complaint_list = complaintServices.getAllComplaints();
+		List<Course> course_list = courseServices.showAllCoursesService();
+		model.addAttribute("all_course_list", course_list);
+		model.addAttribute("all_complaints_list", complaint_list);
 		return "employee-dashboard-page";
+	}
+	
+	@GetMapping("/openComplaint")
+	public String openComplaint() {
+		return "open-complaint-page";
 	}
 
 }

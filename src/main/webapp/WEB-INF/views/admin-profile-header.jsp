@@ -20,7 +20,7 @@
 			<div class="container-fluid p-4">
 				<div class="row">
 					<div class="col-md-5 fw-bold">
-						<a class="font-style-none text-black fs-3" href="index.jsp">CRM
+						<a class="font-style-none text-black fs-3" href="/">CRM
 							Application</a>
 					</div>
 					<div class="col-md-5 header-static-links">

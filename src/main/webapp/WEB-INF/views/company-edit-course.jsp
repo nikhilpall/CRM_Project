@@ -14,8 +14,9 @@
     </head>
     <body>
     	<c:set var="adminObj" value="${s_admin_obj}"></c:set>
+    	<c:set var="employeeObj" value="${s_employee_obj}"></c:set>
 
-		<c:if test="${empty adminObj}">
+		<c:if test="${empty adminObj and empty employeeObj}">
 			<% response.sendRedirect("/"); %>
 		</c:if>
 		
